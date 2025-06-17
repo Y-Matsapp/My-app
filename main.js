@@ -242,7 +242,7 @@ function update() {
   }
 
   // ボス出現（ランダム）
-  if (!isBossActive && Math.random() < 0.0002) {
+  if (!isBossActive && Math.random() < 0.002) {
     boss = {
       x: canvas.width,
       y: canvas.height / 2 - 100,
@@ -250,7 +250,7 @@ function update() {
       height: 200,
       speed: 2
     };
-    bossHp = 30;
+    bossHp = 25;
     isBossActive = true;
 
     if (!isBgmMuted) {
@@ -435,7 +435,7 @@ function update() {
 
 }
 function playSeBossHit() {
-  const se = new Audio("sound/se_boss_hit.mp3");
+  const se = new Audio("sound/se_boss_Hit.mp3");
   se.volume = 1.0;
   se.play();
 }
@@ -564,6 +564,28 @@ function draw() {
   // ボス描画
   if (isBossActive && boss && bossImg.complete && bossImg.naturalWidth) {
     ctx.drawImage(bossImg, boss.x, boss.y, boss.width, boss.height);
+  }
+  // ボスHPゲージ表示（ボスがアクティブなとき）
+  if (isBossActive && boss) {
+    const barWidth = 150;
+    const barHeight = 15;
+    const hpRatio = bossHp / 30;  // 最大HPで割る（30が最大）
+
+    const barX = boss.x + boss.width / 2 - barWidth / 2;
+    const barY = boss.y - 20;
+
+    // 背景（グレー）
+    ctx.fillStyle = "#555";
+    ctx.fillRect(barX, barY, barWidth, barHeight);
+
+    // HP部分（赤）
+    ctx.fillStyle = "red";
+    ctx.fillRect(barX, barY, barWidth * hpRatio, barHeight);
+
+    // 枠線
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(barX, barY, barWidth, barHeight);
   }
   // 浮かび上がるテキストの描画
   floatingTexts.forEach((t, index) => {
