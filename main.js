@@ -242,7 +242,7 @@ function update() {
   }
 
   // ボス出現（ランダム）
-  if (!isBossActive && Math.random() < 0.002) {
+  if (!isBossActive && Math.random() < 0.0003) {
     boss = {
       x: canvas.width,
       y: canvas.height / 2 - 100,
