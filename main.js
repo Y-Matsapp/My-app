@@ -642,7 +642,6 @@ retryBtn.addEventListener("click", () => {
   isGameOver = false;
   retryBtn.style.display = "none";
   titleBtn.style.display = "none";
-  loop();
 });
 titleBtn.addEventListener("click", () => {
   isBossActive = false;
